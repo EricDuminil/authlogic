@@ -43,13 +43,11 @@ module Authlogic
         #   helper_method :current_user_session, :current_user
         #
         #   def current_user_session
-        #     return @current_user_session if defined?(@current_user_session)
-        #     @current_user_session = UserSession.find
+        #     @current_user_session ||= UserSession.find
         #   end
         #
         #   def current_user
-        #     return @current_user if defined?(@current_user)
-        #     @current_user = current_user_session && current_user_session.user
+        #     @current_user ||= current_user_session && current_user_session.user
         #   end
         #
         # Accepts a single parameter as the id, to find session that you marked with an id:
@@ -61,18 +59,12 @@ module Authlogic
           args = [id].compact
           session = new(*args)
           return session if session.find_record
-          nil
         end
         
         # The name of the class that this session is authenticating with. For example, the UserSession class will authenticate with the User class
         # unless you specify otherwise in your configuration.
         def klass
-          @klass ||=
-            if klass_name
-              klass_name.constantize
-            else
-              nil
-            end
+          @klass ||= klass_name && klass_name.constantize
         end
         
         # Same as klass, just returns a string instead of the actual constant.
@@ -150,8 +142,7 @@ module Authlogic
       def credentials=(values)
         return if values.blank? || !values.is_a?(Hash)
         values.symbolize_keys!
-        values.each do |field, value|
-          next if value.blank?
+        values.reject{|f,v| v.blank?}.each do |field, value|
           send("#{field}=", value)
         end
       end
@@ -251,9 +242,7 @@ module Authlogic
       end
       
       # Accepts a boolean as a flag to remember the session or not. Basically to expire the cookie at the end of the session or keep it for "remember_me_until".
-      def remember_me=(value)
-        @remember_me = value
-      end
+      attr_writer :remember_me
       
       # Allows users to be remembered via a cookie.
       def remember_me?
@@ -262,8 +251,7 @@ module Authlogic
       
       # When to expire the cookie. See remember_me_for configuration option to change this.
       def remember_me_until
-        return unless remember_me?
-        remember_me_for.from_now
+        remember_me_for.from_now if remember_me?
       end
       
       # Creates / updates a new user session for you. It does all of the magic:

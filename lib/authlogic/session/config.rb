@@ -57,10 +57,10 @@ module Authlogic
         # * <tt>Default:</tt> "#{klass_name.underscore}_credentials"
         # * <tt>Accepts:</tt> String
         def cookie_key(value = nil)
-          if value.nil?
-            read_inheritable_attribute(:cookie_key) || cookie_key("#{klass_name.underscore}_credentials")
-          else
+          if value
             write_inheritable_attribute(:cookie_key, value)
+          else
+            read_inheritable_attribute(:cookie_key) || cookie_key("#{klass_name.underscore}_credentials")
           end
         end
         alias_method :cookie_key=, :cookie_key
@@ -81,10 +81,10 @@ module Authlogic
         # * <tt>Default:</tt> "find_by_#{login_field}"
         # * <tt>Accepts:</tt> Symbol or String
         def find_by_login_method(value = nil)
-          if value.nil?
-            read_inheritable_attribute(:find_by_login_method) || find_by_login_method("find_by_#{login_field}")
-          else
+          if value
             write_inheritable_attribute(:find_by_login_method, value)
+          else
+            read_inheritable_attribute(:find_by_login_method) || find_by_login_method("find_by_#{login_field}")
           end
         end
         alias_method :find_by_login_method=, :find_by_login_method
@@ -111,10 +111,10 @@ module Authlogic
         # * <tt>Default:</tt> 0
         # * <tt>Accepts:</tt> integer representing time in seconds
         def last_request_at_threshold(value = nil)
-          if value.nil?
-            read_inheritable_attribute(:last_request_at_threshold) || last_request_at_threshold(0)
-          else
+          if value
             write_inheritable_attribute(:last_request_at_threshold, value)
+          else
+            read_inheritable_attribute(:last_request_at_threshold) || last_request_at_threshold(0)
           end
         end
         alias_method :last_request_at_threshold=, :last_request_at_threshold
@@ -124,10 +124,10 @@ module Authlogic
         # * <tt>Default:</tt> "can not be blank"
         # * <tt>Accepts:</tt> String
         def login_blank_message(value = nil)
-          if value.nil?
-            read_inheritable_attribute(:login_blank_message) || login_blank_message("can not be blank")
-          else
+          if value
             write_inheritable_attribute(:login_blank_message, value)
+          else
+            read_inheritable_attribute(:login_blank_message) || login_blank_message("can not be blank")
           end
         end
         alias_method :login_blank_message=, :login_blank_message
@@ -137,10 +137,10 @@ module Authlogic
         # * <tt>Default:</tt> "does not exist"
         # * <tt>Accepts:</tt> String
         def login_not_found_message(value = nil)
-          if value.nil?
-            read_inheritable_attribute(:login_not_found_message) || login_not_found_message("does not exist")
-          else
+          if value
             write_inheritable_attribute(:login_not_found_message, value)
+          else
+            read_inheritable_attribute(:login_not_found_message) || login_not_found_message("does not exist")
           end
         end
         alias_method :login_not_found_message=, :login_not_found_message
@@ -153,10 +153,10 @@ module Authlogic
         # * <tt>Default:</tt> Uses the configuration option in your model: User.acts_as_authentic_config[:login_field]
         # * <tt>Accepts:</tt> Symbol or String
         def login_field(value = nil)
-          if value.nil?
-            read_inheritable_attribute(:login_field) || login_field(klass.acts_as_authentic_config[:login_field])
-          else
+          if value
             write_inheritable_attribute(:login_field, value)
+          else
+            read_inheritable_attribute(:login_field) || login_field(klass.acts_as_authentic_config[:login_field])
           end
         end
         alias_method :login_field=, :login_field
@@ -166,10 +166,10 @@ module Authlogic
         # * <tt>Default:</tt> "Your account is not active"
         # * <tt>Accepts:</tt> String
         def not_active_message(value = nil)
-          if value.nil?
-            read_inheritable_attribute(:not_active_message) || not_active_message("Your account is not active")
-          else
+          if value
             write_inheritable_attribute(:not_active_message, value)
+          else
+            read_inheritable_attribute(:not_active_message) || not_active_message("Your account is not active")
           end
         end
         alias_method :not_active_message=, :not_active_message
@@ -179,10 +179,10 @@ module Authlogic
         # * <tt>Default:</tt> "Your account is not approved"
         # * <tt>Accepts:</tt> String
         def not_approved_message(value = nil)
-          if value.nil?
-            read_inheritable_attribute(:not_approved_message) || not_approved_message("Your account is not approved")
-          else
+          if value
             write_inheritable_attribute(:not_approved_message, value)
+          else
+            read_inheritable_attribute(:not_approved_message) || not_approved_message("Your account is not approved")
           end
         end
         alias_method :not_approved_message=, :not_approved_message
@@ -192,10 +192,10 @@ module Authlogic
         # * <tt>Default:</tt> "Your account is not confirmed"
         # * <tt>Accepts:</tt> String
         def not_confirmed_message(value = nil)
-          if value.nil?
-            read_inheritable_attribute(:not_confirmed_message) || not_confirmed_message("Your account is not confirmed")
-          else
+          if value
             write_inheritable_attribute(:not_confirmed_message, value)
+          else
+            read_inheritable_attribute(:not_confirmed_message) || not_confirmed_message("Your account is not confirmed")
           end
         end
         alias_method :not_confirmed_message=, :not_confirmed_message
@@ -210,10 +210,10 @@ module Authlogic
         # * <tt>Default:</tt> cookie_key
         # * <tt>Accepts:</tt> String
         def params_key(value = nil)
-          if value.nil?
-            read_inheritable_attribute(:params_key) || params_key(cookie_key)
-          else
+          if value
             write_inheritable_attribute(:params_key, value)
+          else
+            read_inheritable_attribute(:params_key) || params_key(cookie_key)
           end
         end
         alias_method :params_key=, :params_key
@@ -223,10 +223,10 @@ module Authlogic
         # * <tt>Default:</tt> "can not be blank"
         # * <tt>Accepts:</tt> String
         def password_blank_message(value = nil)
-          if value.nil?
-            read_inheritable_attribute(:password_blank_message) || password_blank_message("can not be blank")
-          else
+          if value
             write_inheritable_attribute(:password_blank_message, value)
+          else
+            read_inheritable_attribute(:password_blank_message) || password_blank_message("can not be blank")
           end
         end
         alias_method :password_blank_message=, :password_blank_message
@@ -236,10 +236,10 @@ module Authlogic
         # * <tt>Default:</tt> :password
         # * <tt>Accepts:</tt> Symbol or String
         def password_field(value = nil)
-          if value.nil?
-            read_inheritable_attribute(:password_field) || password_field(:password)
-          else
+          if value
             write_inheritable_attribute(:password_field, value)
+          else
+            read_inheritable_attribute(:password_field) || password_field(:password)
           end
         end
         alias_method :password_field=, :password_field
@@ -249,10 +249,10 @@ module Authlogic
         # * <tt>Default:</tt> "is invalid"
         # * <tt>Accepts:</tt> String
         def password_invalid_message(value = nil)
-          if value.nil?
-            read_inheritable_attribute(:password_invalid_message) || password_invalid_message("is invalid")
-          else
+          if value
             write_inheritable_attribute(:password_invalid_message, value)
+          else
+            read_inheritable_attribute(:password_invalid_message) || password_invalid_message("is invalid")
           end
         end
         alias_method :password_invalid_message=, :password_invalid_message
@@ -288,10 +288,10 @@ module Authlogic
         # * <tt>Default:</tt> cookie_key
         # * <tt>Accepts:</tt> Symbol or String
         def session_key(value = nil)
-          if value.nil?
-            read_inheritable_attribute(:session_key) || session_key(cookie_key)
-          else
+          if value
             write_inheritable_attribute(:session_key, value)
+          else
+            read_inheritable_attribute(:session_key) || session_key(cookie_key)
           end
         end
         alias_method :session_key=, :session_key
@@ -315,10 +315,10 @@ module Authlogic
         # * <tt>Default:</tt> "valid_#{password_field}?"
         # * <tt>Accepts:</tt> Symbol or String
         def verify_password_method(value = nil)
-          if value.nil?
-            read_inheritable_attribute(:verify_password_method) || verify_password_method("valid_#{password_field}?")
-          else
+          if value
             write_inheritable_attribute(:verify_password_method, value)
+          else
+            read_inheritable_attribute(:verify_password_method) || verify_password_method("valid_#{password_field}?")
           end
         end
         alias_method :verify_password_method=, :verify_password_method
